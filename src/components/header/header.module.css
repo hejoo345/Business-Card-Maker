@@ -1,0 +1,15 @@
+.header {
+  width: 100%;
+  text-align: center;
+  position: relative;
+  background-color: #50508c;
+  padding: 0.5em;
+  border-radius: 20px;
+  color: white;
+}
+.logoutBtn {
+  position: absolute;
+  right: 3em;
+  top: 1em;
+  padding: 0.9em;
+}

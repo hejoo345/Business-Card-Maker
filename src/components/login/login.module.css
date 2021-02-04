@@ -1,0 +1,30 @@
+.login {
+  width: 30em;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.loginBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  padding: 1rem 0;
+}
+.Login {
+  color: #7878aa;
+}
+.googleBtn,
+.githubBtn {
+  font-size: 1.2rem;
+  background-color: white;
+  margin: 0.5em;
+  border: 0.5px solid lightgray;
+  border-radius: 20px;
+  padding: 0.5em 2em;
+  width: 80%;
+  cursor: pointer;
+}

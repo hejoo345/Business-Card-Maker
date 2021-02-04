@@ -1,0 +1,57 @@
+@value fontSize from '../../common/size.css';
+
+.cardMakerAdd {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 90%;
+}
+.line1 {
+  display: flex;
+}
+.name {
+  font-size: fontSize;
+  flex: 1 1 33%;
+  padding: 0.5em;
+}
+.company {
+  font-size: 1.25rem;
+  flex: 1 1 33%;
+  padding: 0.5em;
+}
+.theme {
+  font-size: 1.25rem;
+  flex: 1 1 33%;
+  padding: 0.5em;
+}
+.line2 {
+  display: flex;
+}
+.title {
+  font-size: 1.25rem;
+  flex: 1 1 50%;
+  padding: 0.5em;
+}
+.email {
+  font-size: 1.25rem;
+  flex: 1 1 50%;
+  padding: 0.5em;
+}
+.message {
+  font-size: 1.25rem;
+  width: 100%;
+  padding: 0.5em;
+}
+.line4 {
+  display: flex;
+}
+.fileBtn {
+  font-size: 1.25rem;
+  flex: 1 1 50%;
+  padding: 0.5em;
+}
+.addBtn {
+  font-size: 1.25rem;
+  flex: 1 1 50%;
+  padding: 0.5em;
+}

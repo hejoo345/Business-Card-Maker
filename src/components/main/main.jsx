@@ -1,12 +1,51 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import SplitPane from 'react-split-pane';
 import CardMakerAdd from '../cardMakerList/cardMakerAdd';
 import CardMakerList from '../cardMakerList/cardMakerList';
+import CardPreviewList from '../cardPreviewList/cardPreviewList';
 import Header from '../header/header';
 import styles from './main.module.css';
 
 const Main = ({authService}) => {
     const history = useHistory();
+
+    const [cards, setCards] = useState([
+        {
+            id: 1,
+            name: 'jisung',
+            company: 'sm',
+            theme: 'Light',
+            title: '햄찌',
+            email: 'js@gmail.com',
+            message: 'msg',
+            fileName: 'img',
+            fileURL: 'img.jpg',
+        },
+        {
+            id: 2,
+            name: 'jungwoo',
+            company: 'sm',
+            theme: 'Dark',
+            title: '오복',
+            email: 'jw@gmail.com',
+            message: 'msg',
+            fileName: 'img',
+            fileURL: 'img.jpg',
+        },
+        {
+            id: 3,
+            name: 'mark',
+            company: 'sm',
+            theme: 'Beige',
+            title: 'onyour__mark',
+            email: 'mark@gmail.com',
+            message: 'msg',
+            fileName: 'img',
+            fileURL: 'img.jpg',
+        }
+    ])
+
         const onLogout = () =>{
             authService.logout();
             console.log("로그아웃함");
@@ -22,11 +61,20 @@ const Main = ({authService}) => {
         })
 
         return(
-            <section className={styles.main}>
+            <>
             <Header onLogout={onLogout}/>
-            <CardMakerList/>
-            <CardMakerAdd/>
+            <section className={styles.main}>
+                <section className={styles.cardMaker}>
+                    <h1 className={styles.cardMakerTitle}>Card Maker</h1>
+                    <CardMakerList cards={cards}/>
+                    <CardMakerAdd/>
+                </section>
+                <section className={styles.cardPreview}>
+                    <h1 className={styles.cardPreviewTitle}>Card Preview</h1>
+                    <CardPreviewList cards={cards}/>
+                </section>
             </section>
+            </>
         );
         };
 

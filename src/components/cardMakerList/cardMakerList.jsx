@@ -1,9 +1,16 @@
 import React from 'react';
 import CardMakerItem from '../cardMakerItem/cardMakerItem';
+import styles from './cardMakerList.module.css';
 
-const CardMakerList = (props) => {
+const CardMakerList = ({cards}) => {
     return(
-        <CardMakerItem/>
+        <ul className={styles.cards}>
+            {
+            cards.map(card=>(
+                <CardMakerItem key={card.id} card={card}/>
+            ))
+            }
+        </ul>
     );
 };
 

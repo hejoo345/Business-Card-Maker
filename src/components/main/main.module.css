@@ -1,0 +1,34 @@
+@value mediaQuery from '../../common/size.css';
+
+.main {
+  display: flex;
+}
+.cardMakerTitle {
+  position: relative;
+}
+.cardPreviewTitle {
+  position: relative;
+}
+.cardMaker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+.cardPreview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+@media screen and (max-width: mediaQuery) {
+  .main {
+    flex-direction: column;
+  }
+  .cardMaker {
+    width: 100%;
+  }
+  .cardPreview {
+    width: 100%;
+  }
+}

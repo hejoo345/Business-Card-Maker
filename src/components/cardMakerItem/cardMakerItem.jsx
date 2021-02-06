@@ -2,30 +2,30 @@ import React from 'react';
 import styles from './cardMakerItem.module.css';
 
 const CardMakerItem = ({card}) => {
+
+    const fileName = card.fileName || 'No File';
     return(
-        <li className={styles.cardMakerItem}>
+        <form className={styles.cardMakerItem}>
         <div className={styles.line1}>
-            <input className={styles.name} type="text" placeholder={card.name}></input>
-            <input className={styles.company} type="text" placeholder={card.company}></input>
-            <select className={styles.theme} value={card.theme}>
+            <input className={styles.name} type="text" name="name" defaultValue={card.name}></input>
+            <input className={styles.company} type="text" name="company" defaultValue={card.company}></input>
+            <select className={styles.theme} name="theme" defaultValue={card.theme}>
                 <option value="Light">Light</option>
                 <option value="Dark">Black</option>
                 <option value="Beige">Beige</option>
             </select>
         </div>
         <div className={styles.line2}>
-            <input className={styles.title} type="text" placeholder={card.title}></input>
-            <input className={styles.email} type="text" placeholder={card.email}></input>
+            <input className={styles.title} type="text" name="title" defaultValue={card.title}></input>
+            <input className={styles.email} type="text" name="email" defaultValue={card.email}></input>
         </div>
-        <div className={styles.line3}>
-            <input className={styles.message} type="text" placeholder={card.message}></input>
-        </div>
+        <textarea className={styles.message} type="text" name="message" defaultValue={card.message}></textarea>
         <div className={styles.line4}>
-            <button className={styles.fileBtn} placeholder="No File">{card.fileName}</button>
+            <button className={styles.fileBtn} >{fileName}</button>
             <button className={styles.deleteBtn}>Delete</button>
         </div>
         
-    </li>  
+    </form>  
     );}
 
 export default CardMakerItem;

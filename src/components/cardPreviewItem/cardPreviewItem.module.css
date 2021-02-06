@@ -1,23 +1,49 @@
 .cardPreviewItem {
   display: flex;
   align-items: center;
-  background-color: #fdf5e6;
   width: 100%;
   border-radius: 20px;
   padding: 1rem;
   margin-bottom: 1rem;
 }
-.imgBox {
+.cardPreviewItem.light {
+  background-color: white;
+}
+.cardPreviewItem.dark {
+  background-color: #3c3c3c;
+  color: white;
+}
+.cardPreviewItem.beige {
+  background-color: #fdf5e6;
+}
+
+.img {
   border-radius: 50%;
   width: 10em;
   height: 10em;
-  overflow: hidden;
-}
-.img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 .info {
   list-style: none;
+  width: 100%;
+}
+.name,
+.company,
+.title,
+.message,
+.email {
+  padding: 0.2em;
+}
+.name {
+  margin: 0;
+}
+.company {
+  margin-bottom: 1em;
+}
+.company::after {
+  content: "";
+  display: block;
+  width: 90%;
+  height: 2px;
+  background-color: wheat;
+  transform: translateY(0.5em);
 }

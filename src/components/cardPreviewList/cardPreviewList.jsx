@@ -7,7 +7,6 @@ const CardPreviewList = ({cards}) => {
         <ul className={styles.cards}>
             {
                 cards.map(card=>(
-                    // console.log(card);
                     <CardPreviewItem card={card} key={card.id}/>
                 ))
             }

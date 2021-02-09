@@ -86,3 +86,6 @@
   color: white;
   cursor: pointer;
 }
+.deleteBtn:hover {
+  opacity: 0.8;
+}

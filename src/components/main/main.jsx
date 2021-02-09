@@ -8,7 +8,7 @@ import Footer from '../footer/footer';
 import Header from '../header/header';
 import styles from './main.module.css';
 
-const Main = ({authService}) => {
+const Main = ({FileInput, authService}) => {
     const history = useHistory();
 
     const [cards, setCards] = useState([
@@ -47,13 +47,10 @@ const Main = ({authService}) => {
         },
     ])
 
-        const onImgUpload = (id, fileName, previewURL) =>{
-            console.log(id);
-            console.log(fileName);
-
+        const onFileChange = (file) =>{
             const newCards = cards.map(item=>{
-                if(item.id==id){
-                    return {...item, fileName:fileName, fileURL:previewURL};
+                if(item.id===file.id){
+                    return {...item, fileName:file.name, fileURL:file.url};
                 }
                 return item;
             })
@@ -116,11 +113,16 @@ const Main = ({authService}) => {
             <section className={styles.main}>
                 <section className={styles.cardMaker}>
                     <h1 className={styles.cardMakerTitle}>Card Maker</h1>
-                    <CardMakerList cards={cards} 
+                    <CardMakerList
+                    FileInput={FileInput}
+                    cards={cards} 
                     onCardDelete={onCardDelete} 
                     editCardHandler={editCardHandler}
-                    onImgUpload={onImgUpload}/>
-                    <CardMakerAdd onCardAdd={onCardAdd}/>
+                    onFileChange={onFileChange}/>
+                    <CardMakerAdd 
+                    FileInput={FileInput}
+                    onCardAdd={onCardAdd}
+                    onFileChange={onFileChange}/>
                 </section>
                 <section className={styles.cardPreview}>
                     <h1 className={styles.cardPreviewTitle}>Card Preview</h1>

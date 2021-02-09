@@ -4,7 +4,7 @@ import Login from './components/login/login';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Main from './components/main/main';
 
-function App({authService}) {
+function App({FileInput, authService}) {
  
   return (
     <>
@@ -19,6 +19,7 @@ function App({authService}) {
         <Route path={'/main'} exact>
           <div className={styles.main}>
             <Main
+              FileInput={FileInput}
               authService={authService}/>
           </div>
         </Route>

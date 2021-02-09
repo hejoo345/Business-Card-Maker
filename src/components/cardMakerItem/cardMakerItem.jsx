@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
-import ImgInputButton from '../imgInputButton/imgInputButton';
+// import ImgInputButton from '../imgInputButton/imgInputButton';
 import styles from './cardMakerItem.module.css';
 
-const CardMakerItem = memo(({card, onCardDelete, editCardHandler,onImgUpload}) => {
+const CardMakerItem = memo(({FileInput, card, onCardDelete, editCardHandler,onFileChange}) => {
 
     
     const onCardDel = (e) =>{
@@ -28,7 +28,9 @@ const CardMakerItem = memo(({card, onCardDelete, editCardHandler,onImgUpload}) =
         </div>
         <textarea className={styles.message} type="text" id={card.id} name="message" defaultValue={card.message} onChange={editCardHandler}></textarea>
         <div className={styles.line4}>
-            <ImgInputButton fileName={fileName} onImgUpload={onImgUpload} cardId={card.id}/>
+            <FileInput fileName={fileName}
+            cardId={card.id}
+            onFileChange={onFileChange}/>
             <button className={styles.deleteBtn} onClick={onCardDel}>Delete</button>
         </div>
         

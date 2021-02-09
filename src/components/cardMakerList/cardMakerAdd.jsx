@@ -1,7 +1,7 @@
 import React, { memo, useState } from 'react';
-import ImgInputButton from '../imgInputButton/imgInputButton';
+// import ImgInputButton from '../imgInputButton/imgInputButton';
 import styles from './cardMakerAdd.module.css';
-const CardMakerAdd = memo(({onCardAdd}) => {
+const CardMakerAdd = memo(({FileInput, onCardAdd}) => {
     
     const formRef = React.createRef();
     const nameRef = React.createRef();
@@ -11,9 +11,7 @@ const CardMakerAdd = memo(({onCardAdd}) => {
     const emailRef = React.createRef();
     const messageRef = React.createRef();
 
-    const fileName = 'No File';
-    const [filename, setFilename] =useState(null);
-    const [previewURL, setURL]= useState(null);
+    const [file, setFile] = useState({ fileName:null, fileURL:null });
 
     const onSubmit = (e) =>{
         e.preventDefault();
@@ -26,15 +24,15 @@ const CardMakerAdd = memo(({onCardAdd}) => {
             title: titleRef.current.value || '',
             email: emailRef.current.value || '',
             message: messageRef.current.value || '',     
-            fileName: filename ||'',
-            fileURL: previewURL || '',
+            fileName: file.fileName ||'',
+            fileURL: file.fileURL || '',
         }
         formRef.current.reset();
+        setFile({ fileName:null, fileURL:null });
         onCardAdd(newCard);
     }
-        const getFileNameAndURL = (fileName , previewURL)=>{
-            setFilename(fileName);
-            setURL(previewURL);
+        const onFileChange = (file)=>{
+            setFile({fileName:file.name, fileURL:file.url});
         }
     return(
         <form ref={formRef}className={styles.cardMakerAdd} onSubmit={onSubmit}>
@@ -53,9 +51,8 @@ const CardMakerAdd = memo(({onCardAdd}) => {
             </div>
                 <textarea ref={messageRef} className={styles.message} type="text" name="message" placeholder="message"  ></textarea>
             <div className={styles.line4}>
-                <ImgInputButton fileName={fileName} 
-                getFileNameAndURL={getFileNameAndURL}/>
-                {/* <input type="file" className={styles.fileBtn} ></input> */}
+                <FileInput fileName={file.fileName} 
+                onFileChange={onFileChange}/>
                 <button className={styles.addBtn}>Add</button>
             </div>
         </form>  

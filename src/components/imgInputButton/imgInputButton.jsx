@@ -1,7 +1,9 @@
-import React, { memo, useRef } from 'react';
+import React, { memo, useRef, useState } from 'react';
 import styles from './imgInputButton.module.css';
 
 const ImgInputButton = memo(({fileName, cardId, imgUploader, onFileChange}) => {
+
+    const [loading, setLoading] = useState(false);
 
     const inputRef = useRef();
 
@@ -11,8 +13,9 @@ const ImgInputButton = memo(({fileName, cardId, imgUploader, onFileChange}) => {
     }
 
     const onChange=async (e)=>{
+        setLoading(true);
         const uploaded = await imgUploader.upload(e.target.files[0]);
-        console.log(uploaded);
+        setLoading(false);
         onFileChange({
             id: cardId,
             name: uploaded.original_filename,
@@ -27,10 +30,18 @@ const ImgInputButton = memo(({fileName, cardId, imgUploader, onFileChange}) => {
                 className={styles.fileBtn} type="file" id={cardId}
                 accept='image/jpg, image/png, image/jpeg'
                 onChange={onChange}
-                placeholder={fileName}
                 ></input>
-                <button className={styles.button} 
-                onClick={onButtonClick}>{fileName||'No File'}</button>
+                {
+                    !loading&&
+                    <button className={styles.button}
+                    onClick={onButtonClick}>
+                        {fileName||'No File'}
+                    </button>
+                }
+                {
+                    loading &&
+                    <div className={styles.loading}></div>
+                }
             </div>
     )}
     )

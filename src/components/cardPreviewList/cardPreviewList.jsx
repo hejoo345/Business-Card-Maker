@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import CardPreviewItem from '../cardPreviewItem/cardPreviewItem';
 import styles from './cardPreviewList.module.css'
 
-const CardPreviewList = ({cards}) => {
+const CardPreviewList = memo(({cards}) => {
     return(
         <ul className={styles.cards}>
             {
@@ -12,6 +12,7 @@ const CardPreviewList = ({cards}) => {
             }
 
         </ul>
-    )};
+    );}
+    )
 
 export default CardPreviewList;

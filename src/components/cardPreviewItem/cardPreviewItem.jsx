@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './cardPreviewItem.module.css';
 
 const DEFAULT_IMG = '/images/default_logo.png';
@@ -14,7 +14,7 @@ const getStyles = (theme) =>{
     }
 }
 
-const CardPreviewItem = ({card}) => {
+const CardPreviewItem = memo(({card}) => {
     const url = card.fileURL || DEFAULT_IMG;
     return(
         <li className={`${styles.cardPreviewItem} ${getStyles(card.theme)}`}>
@@ -28,6 +28,6 @@ const CardPreviewItem = ({card}) => {
                 <li className={styles.email}>{card.email}</li>
             </ul>
         </li>
-    )};
+    )})
 
 export default CardPreviewItem;

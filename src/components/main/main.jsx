@@ -46,6 +46,50 @@ const Main = ({authService}) => {
             fileURL: '',
         },
     ])
+
+        const onImgUpload = (id, fileName, previewURL) =>{
+            console.log(id);
+            console.log(fileName);
+
+            const newCards = cards.map(item=>{
+                if(item.id==id){
+                    return {...item, fileName:fileName, fileURL:previewURL};
+                }
+                return item;
+            })
+            setCards(newCards);
+        }
+
+        const editCardHandler = (e)=>{
+            const newCards = cards.map(item=>{
+                if(item.id == e.currentTarget.id){
+                    const value = e.currentTarget.value;
+                    switch(e.currentTarget.name){
+                        case 'name':
+                            return {...item, name: value};
+                        case 'company':
+                            return {...item, company: value};
+                        case 'theme':
+                            return {...item, theme: value};
+                        case 'title':
+                            return {...item, title: value};
+                        case 'email':
+                            return {...item, email: value};
+                        case 'message':
+                            return {...item, message: value};
+                    }
+                }
+                return item;
+            })
+            setCards(newCards);
+        }
+
+        const onCardDelete = (cardId) =>{
+            console.log(cardId);
+            const newCards = cards.filter(item=>item.id!==cardId);
+            setCards(newCards);
+        }
+    
         const onCardAdd = (newCard) =>{
             console.log('추가완');
             const newCards = [...cards, newCard];
@@ -72,8 +116,11 @@ const Main = ({authService}) => {
             <section className={styles.main}>
                 <section className={styles.cardMaker}>
                     <h1 className={styles.cardMakerTitle}>Card Maker</h1>
-                    <CardMakerList cards={cards} />
-                    <CardMakerAdd onCardAdd={onCardAdd} />
+                    <CardMakerList cards={cards} 
+                    onCardDelete={onCardDelete} 
+                    editCardHandler={editCardHandler}
+                    onImgUpload={onImgUpload}/>
+                    <CardMakerAdd onCardAdd={onCardAdd}/>
                 </section>
                 <section className={styles.cardPreview}>
                     <h1 className={styles.cardPreviewTitle}>Card Preview</h1>

@@ -1,65 +1,65 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
+import ImgInputButton from '../imgInputButton/imgInputButton';
 import styles from './cardMakerAdd.module.css';
-const CardMakerAdd = ({onCardAdd}) => {
+const CardMakerAdd = memo(({onCardAdd}) => {
     
     const formRef = React.createRef();
+    const nameRef = React.createRef();
+    const companyRef = React.createRef();
+    const themeRef = React.createRef();
+    const titleRef = React.createRef();
+    const emailRef = React.createRef();
+    const messageRef = React.createRef();
 
-    const [newCard , setNewCard] = useState({
-        id:'',
-        name: '',
-        company: '',
-        theme: '',
-        title: '',
-        email: '',
-        message: '',        
-    })
-
-    const cardAddHandler= (e) =>{
-        const kind = e.currentTarget;
-        switch(kind.name){
-            case 'name':
-                return setNewCard({...newCard, name: kind.value, id: Date.now()});
-            case 'company':
-                return setNewCard({...newCard, company: kind.value});
-            case 'theme':
-                return setNewCard({...newCard, theme: kind.value});
-            case 'title':
-                return setNewCard({...newCard, title: kind.value});
-            case 'email':
-                return setNewCard({...newCard, email: kind.value});
-            case 'message':
-                return setNewCard({...newCard, message: kind.value});
-            default:
-                return console.error();
-        }
-    }
+    const fileName = 'No File';
+    const [filename, setFilename] =useState(null);
+    const [previewURL, setURL]= useState(null);
 
     const onSubmit = (e) =>{
         e.preventDefault();
+        const newCard = {
+            
+            id : Date.now(),
+            name : nameRef.current.value || '',
+            company: companyRef.current.value ||'',
+            theme: themeRef.current.value || '',
+            title: titleRef.current.value || '',
+            email: emailRef.current.value || '',
+            message: messageRef.current.value || '',     
+            fileName: filename ||'',
+            fileURL: previewURL || '',
+        }
         formRef.current.reset();
         onCardAdd(newCard);
     }
+        const getFileNameAndURL = (fileName , previewURL)=>{
+            setFilename(fileName);
+            setURL(previewURL);
+        }
     return(
         <form ref={formRef}className={styles.cardMakerAdd} onSubmit={onSubmit}>
             <div className={styles.line1}>
-                <input className={styles.name} type="text" name="name" placeholder="name" defaultValue="" onChange={cardAddHandler} ></input>
-                <input className={styles.company} type="text" name="company" placeholder="company" defaultValue="" onChange={cardAddHandler}></input>
-                <select className={styles.theme} name="theme" onChange={cardAddHandler} >
+                <input ref={nameRef} className={styles.name} type="text" name="name" placeholder="name"   ></input>
+                <input ref={companyRef} className={styles.company} type="text" name="company" placeholder="company"  ></input>
+                <select ref={themeRef} className={styles.theme} name="theme" >
                     <option value="Light">Light</option>
                     <option value="Dark">Black</option>
                     <option value="Beige">Beige</option>
                 </select>
             </div>
             <div className={styles.line2}>
-                <input className={styles.title} type="text" name="title" placeholder="title" defaultValue="" onChange={cardAddHandler}></input>
-                <input className={styles.email} type="text" name="email"placeholder="email" defaultValue="" onChange={cardAddHandler}></input>
+                <input ref={titleRef} className={styles.title} type="text" name="title" placeholder="title"  ></input>
+                <input ref={emailRef} className={styles.email} type="text" name="email"placeholder="email"  ></input>
             </div>
-                <textarea className={styles.message} type="text" name="message" placeholder="message" defaultValue="" onChange={cardAddHandler}></textarea>
+                <textarea ref={messageRef} className={styles.message} type="text" name="message" placeholder="message"  ></textarea>
             <div className={styles.line4}>
-                <button className={styles.fileBtn}>No File</button>
+                <ImgInputButton fileName={fileName} 
+                getFileNameAndURL={getFileNameAndURL}/>
+                {/* <input type="file" className={styles.fileBtn} ></input> */}
                 <button className={styles.addBtn}>Add</button>
             </div>
         </form>  
-    )};
+    )}
+    )
 
 export default CardMakerAdd;

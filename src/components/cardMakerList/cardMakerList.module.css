@@ -1,5 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+  align-items: center;
+  border-right: 1px solid #a297bd;
+  overflow-y: auto;
+}
 .cards {
   padding-left: 0;
   margin: 0;
   width: 90%;
+}
+.cardMakerTitle {
+  position: relative;
 }

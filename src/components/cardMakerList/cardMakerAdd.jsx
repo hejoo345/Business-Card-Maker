@@ -16,7 +16,6 @@ const CardMakerAdd = memo(({FileInput, onCardAdd}) => {
     const onSubmit = (e) =>{
         e.preventDefault();
         const newCard = {
-            
             id : Date.now(),
             name : nameRef.current.value || '',
             company: companyRef.current.value ||'',
@@ -41,7 +40,7 @@ const CardMakerAdd = memo(({FileInput, onCardAdd}) => {
                 <input ref={companyRef} className={styles.company} type="text" name="company" placeholder="company"  ></input>
                 <select ref={themeRef} className={styles.theme} name="theme" >
                     <option value="Light">Light</option>
-                    <option value="Dark">Black</option>
+                    <option value="Dark">Dark</option>
                     <option value="Beige">Beige</option>
                 </select>
             </div>

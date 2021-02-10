@@ -4,7 +4,7 @@ import Login from './components/login/login';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Main from './components/main/main';
 
-function App({FileInput, authService}) {
+function App({FileInput, authService, cardRepository}) {
  
   return (
     <>
@@ -20,7 +20,8 @@ function App({FileInput, authService}) {
           <div className={styles.main}>
             <Main
               FileInput={FileInput}
-              authService={authService}/>
+              authService={authService}
+              cardRepository={cardRepository}/>
           </div>
         </Route>
       </Switch>

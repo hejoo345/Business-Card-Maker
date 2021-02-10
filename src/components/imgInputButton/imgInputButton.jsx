@@ -17,11 +17,9 @@ const ImgInputButton = memo(({fileName, cardId, imgUploader, onFileChange}) => {
         const uploaded = await imgUploader.upload(e.target.files[0]);
         setLoading(false);
         onFileChange({
-            id: cardId,
             name: uploaded.original_filename,
             url:uploaded.url,
-        }
-        )
+        })
     }
     return(
             <div className={styles.container}>

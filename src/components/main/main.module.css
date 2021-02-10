@@ -2,35 +2,15 @@
 
 .main {
   display: flex;
-  position: relative;
-}
-.cardMakerTitle {
-  position: relative;
-}
-.cardPreviewTitle {
-  position: relative;
-}
-.cardMaker {
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 50%;
-  border-right: 1px solid #a297bd;
+  position: relative;
 }
-.cardPreview {
+.container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 50%;
+  min-height: 0;
 }
 @media screen and (max-width: mediaQuery) {
-  .main {
+  .container {
     flex-direction: column;
-  }
-  .cardMaker {
-    width: 100%;
-  }
-  .cardPreview {
-    width: 100%;
   }
 }

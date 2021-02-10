@@ -1,136 +1,88 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import SplitPane from 'react-split-pane';
-import CardMakerAdd from '../cardMakerList/cardMakerAdd';
 import CardMakerList from '../cardMakerList/cardMakerList';
 import CardPreviewList from '../cardPreviewList/cardPreviewList';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import styles from './main.module.css';
 
-const Main = ({FileInput, authService}) => {
-    const history = useHistory();
+const Main = ({FileInput, authService, cardRepository}) => {
+        const historyState = useHistory().state;
+        const [cards, setCards] = useState({});
+        const [userId, setUserId] = useState(historyState&&historyState.id);
 
-    const [cards, setCards] = useState([
-        {
-            id: 1,
-            name: 'jisung',
-            company: 'sm',
-            theme: 'Light',
-            title: '햄찌',
-            email: 'js@gmail.com',
-            message: 'msg',
-            fileName: '',
-            fileURL: '',
-        },
-        {
-            id: 2,
-            name: 'jungwoo',
-            company: 'sm',
-            theme: 'Dark',
-            title: '오복',
-            email: 'jw@gmail.com',
-            message: 'msg',
-            fileName: '',
-            fileURL: '',
-        },
-        {
-            id: 3,
-            name: 'mark',
-            company: 'sm',
-            theme: 'Beige',
-            title: 'onyour__mark',
-            email: 'mark@gmail.com',
-            message: 'msg',
-            fileName: '',
-            fileURL: '',
-        },
-    ])
+        const history = useHistory();
 
-        const onFileChange = (file) =>{
-            const newCards = cards.map(item=>{
-                if(item.id===file.id){
-                    return {...item, fileName:file.name, fileURL:file.url};
+        useEffect(() => {
+            if (!userId) {
+                return;
+            }
+            const stopSync = cardRepository.syncCards(userId, cards => {
+            setCards(cards);
+            });
+            return () => stopSync();
+        }, [userId]);
+
+        useEffect(()=>{
+            authService.onAuthChange(user=>{
+                if(user){
+                    setUserId(user.uid);
+                }else{
+                    history.push('/');
                 }
-                return item;
             })
-            setCards(newCards);
+        })
+
+        const onCardUpdate = (card)=>{
+            setCards(cards=>{
+                const updated = {...cards};
+                updated[card.id] = card;
+                return updated;
+            });
+            cardRepository.saveCard(userId, card);
         }
 
-        const editCardHandler = (e)=>{
-            const newCards = cards.map(item=>{
-                if(item.id == e.currentTarget.id){
-                    const value = e.currentTarget.value;
-                    switch(e.currentTarget.name){
-                        case 'name':
-                            return {...item, name: value};
-                        case 'company':
-                            return {...item, company: value};
-                        case 'theme':
-                            return {...item, theme: value};
-                        case 'title':
-                            return {...item, title: value};
-                        case 'email':
-                            return {...item, email: value};
-                        case 'message':
-                            return {...item, message: value};
-                    }
-                }
-                return item;
+        const onCardDelete = (card) =>{
+            setCards(cards=>{
+                const newCards = {...cards};
+                delete newCards[card.id];
+                return newCards;
             })
-            setCards(newCards);
-        }
-
-        const onCardDelete = (cardId) =>{
-            console.log(cardId);
-            const newCards = cards.filter(item=>item.id!==cardId);
-            setCards(newCards);
+            cardRepository.removeCard(userId, card);
         }
     
-        const onCardAdd = (newCard) =>{
+        const onCardAdd = (card) =>{
             console.log('추가완');
-            const newCards = [...cards, newCard];
-            setCards(newCards);
+            setCards(cards=>{
+                const newCards = {...cards};
+                newCards[card.id]= card;
+                return newCards;
+            })
+            cardRepository.saveCard(userId, card);
         }
 
         const onLogout = () =>{
             authService.logout();
             console.log("로그아웃함");
 
-        };   
-
-        useEffect(()=>{
-            authService.onAuthChange(user=>{
-                if(!user){
-                    history.push('/');
-                }
-            })
-        })
+        };  
 
         return(
-            <>
-            <Header onLogout={onLogout}/>
+            
             <section className={styles.main}>
-                <section className={styles.cardMaker}>
-                    <h1 className={styles.cardMakerTitle}>Card Maker</h1>
+                <Header onLogout={onLogout}/>
+                <div className={styles.container}>
                     <CardMakerList
                     FileInput={FileInput}
                     cards={cards} 
-                    onCardDelete={onCardDelete} 
-                    editCardHandler={editCardHandler}
-                    onFileChange={onFileChange}/>
-                    <CardMakerAdd 
-                    FileInput={FileInput}
-                    onCardAdd={onCardAdd}
-                    onFileChange={onFileChange}/>
-                </section>
-                <section className={styles.cardPreview}>
-                    <h1 className={styles.cardPreviewTitle}>Card Preview</h1>
+                    onCardDelete={onCardDelete}
+                    onCardUpdate={onCardUpdate}
+                    onCardAdd={onCardAdd}/>
+
                     <CardPreviewList cards={cards}/>
-                </section>
+                </div>
+                <Footer/>
             </section>
-            <Footer/>
-            </>
         );
         };
 

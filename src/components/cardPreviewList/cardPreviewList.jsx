@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import React from 'react';
 import CardPreviewItem from '../cardPreviewItem/cardPreviewItem';
 import styles from './cardPreviewList.module.css'
 
-const CardPreviewList = memo(({cards}) => {
+const CardPreviewList = ({cards}) => {
     return(
         <section className={styles.container}>
             <h1 className={styles.cardPreviewTitle}>Card Preview</h1>
@@ -14,7 +14,7 @@ const CardPreviewList = memo(({cards}) => {
                 }
             </ul>
         </section>
-    );}
-    )
+    )};
+    
 
 export default CardPreviewList;

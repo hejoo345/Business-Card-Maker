@@ -1,18 +1,17 @@
-import firebase from "firebase";
+import firebase from "firebase/app";
 import "firebase/auth";
-import "firebase/firestore";
+import "firebase/database";
 
   const firebaseConfig = {
-    // apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-    // authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-    // databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
-    // projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-    apiKey: "AIzaSyCS9JtGvJWpcIRPV1UlL1UTDceMTNBZokI",
-    authDomain: "business-card-maker-f2bd1.firebaseapp.com",
-    databaseURL: "https://business-card-maker-f2bd1-default-rtdb.firebaseio.com",
-    projectId: "business-card-maker-f2bd1"
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_FIREBASE_DB_URL,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
   };
   // Initialize Firebase
   const firebaseApp = firebase.initializeApp(firebaseConfig);
-  export const auth = firebase.auth();
-  export default firebaseApp;
+
+  export const firebaseAuth = firebaseApp.auth();
+  export const firebaseDatabase = firebaseApp.database();
+  export const googleProvider = new firebase.auth.GoogleAuthProvider();
+  export const githubProvider = new firebase.auth.GithubAuthProvider();

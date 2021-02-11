@@ -5,6 +5,7 @@
   flex-direction: column;
   justify-content: center;
   width: 90%;
+  margin-bottom: 1em;
 }
 .line1 {
   display: flex;

@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
+import React from 'react';
 import CardMakerItem from '../cardMakerItem/cardMakerItem';
 import CardMakerAdd from './cardMakerAdd';
 import styles from './cardMakerList.module.css';
 
-const CardMakerList = memo(({FileInput, cards,onCardDelete,onCardUpdate, onFileChange, onCardAdd}) => {
+const CardMakerList = ({FileInput, cards,onCardDelete,onCardUpdate, onFileChange, onCardAdd}) => {
     return(
         <section className={styles.container}>
             <h1 className={styles.cardMakerTitle}>Card Maker</h1>
@@ -24,6 +24,6 @@ const CardMakerList = memo(({FileInput, cards,onCardDelete,onCardUpdate, onFileC
             onCardAdd={onCardAdd}/>
         </section>
     );
-})
+};
 
 export default CardMakerList;

@@ -7,26 +7,24 @@ import Main from './components/main/main';
 function App({FileInput, authService, cardRepository}) {
  
   return (
-    <>
+    
+    <div className={styles.app}>
     <BrowserRouter>
       <Switch>
         <Route path={'/'} exact>
-          <div className={styles.login}>
             <Login 
               authService={authService}/>
-          </div>
         </Route>
         <Route path={'/main'} exact>
-          <div className={styles.main}>
             <Main
               FileInput={FileInput}
               authService={authService}
               cardRepository={cardRepository}/>
-          </div>
+
         </Route>
       </Switch>
     </BrowserRouter>
-    </>
+    </div>
    
   );
 }

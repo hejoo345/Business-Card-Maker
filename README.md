@@ -21,7 +21,7 @@
 모바일 버전(반응형)
 
 ## What I Learned
-firebase api 중 Authentication을 이용해 구글, 깃허브 계정으로 로그인 하는 법
-Realtime Database를 통해 실시간은 데이터를 변경, 추가, 삭제하는 법
-Cloundinary api를 이용해 이미지를 업로드 하는 법
-React Router 를 사용해 페이지 이동하는 법
+ - firebase api 중 Authentication을 이용해 구글, 깃허브 계정으로 로그인 하는 법
+ - Realtime Database를 통해 실시간은 데이터를 변경, 추가, 삭제하는 법
+ - Cloundinary api를 이용해 이미지를 업로드 하는 법
+ - React Router 를 사용해 페이지 이동하는 법

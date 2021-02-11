@@ -26,7 +26,12 @@
  - Cloundinary api를 이용해 이미지를 업로드 하는 법
  - React Router 를 사용해 페이지 이동하는 법
  - 데이터를 키를 가진 객체 형태로 받아와서 사용하는 법
-  {
+ 
+       {
+     
         Object.keys(cards).map(key=>(
+        
         <CardPreviewItem card={cards[key]} key={key}/>
-   ))}
+        
+        ))}
+        

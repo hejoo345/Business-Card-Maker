@@ -24,7 +24,7 @@ const Main = ({FileInput, authService, cardRepository}) => {
         const stopSync = cardRepository.syncCards(userId, cards => {
         setCards(cards);
         });
-        return () => stopSync();
+        return () =>stopSync();
     }, [userId, cardRepository]);
 
     useEffect(()=>{
